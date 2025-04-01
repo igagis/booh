@@ -1,0 +1,40 @@
+Source: booh
+Section: misc
+Priority: extra
+Maintainer: Ivan Gagis <igagis@gmail.com>
+Build-Depends:
+	debhelper (>= 9),
+	dpkg-dev (>=1.17.0),
+	prorab,
+	prorab-extra,
+	myci,
+	clang-tidy,
+	clang-format,
+	libtst-dev,
+	libclargs-dev,
+	libruisapp-dev
+Build-Depends-Indep: doxygen
+Standards-Version: 3.9.2
+
+Package: booh-opengles-xorg
+Section: misc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+	booh-data
+Description: Double record bookkeeping app.
+ Double record bookkeeping application.
+
+Package: booh-opengles-wayland
+Section: misc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+	booh-data
+Description: Double record bookkeeping app.
+ Double record bookkeeping application.
+
+Package: booh-data
+Section: misc
+Architecture: all
+Depends: ${misc:Depends}
+Description: Double record bookkeeping app data files.
+ Data files for booh.
