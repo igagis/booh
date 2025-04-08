@@ -21,11 +21,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "application.hpp"
 
-#include <iomanip>
-
 #include <clargs/parser.hpp>
 #include <papki/fs_file.hpp>
 #include <utki/debug.hpp>
+
+#include "root_widget.hpp"
 
 using namespace std::string_literals;
 using namespace std::string_view_literals;
@@ -48,8 +48,8 @@ application::application(bool window, std::string_view res_path)
 
 	this->gui.context.get().loader().mount_res_pack(*this->get_res_file(this->res_path));
 
-	// auto c = make_root_widget(this->gui.context);
-	// this->gui.set_root(c);
+	auto c = make_root_widget(this->gui.context);
+	this->gui.set_root(c);
 }
 
 std::unique_ptr<application> booh::make_application(

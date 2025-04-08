@@ -1,4 +1,5 @@
 vocabulary{
+    /*
     settings_menu:title{
         str{Asetukset}
     }
@@ -57,5 +58,5 @@ vocabulary{
 
     quit_dialog:no{
         str{"Ei"}
-    }
+    }*/
 }
