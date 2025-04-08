@@ -1,7 +1,7 @@
 /*
-booh - Double record bookkeeping application
+bedsidemon - Bedside monitor example GUI project
 
-Copyright (C) 2025 Ivan Gagis <igagis@gmail.com>
+Copyright (C) 2024 Gagistech Oy <gagistechoy@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,14 +19,33 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#include <ruisapp/application.hpp>
+#pragma once
 
-#include "application.hpp"
+#include <ruisapp/application.hpp>
 
 namespace booh {
 
-const ruisapp::application_factory app_fac([](auto executbale, auto args) {
-	return make_application(executbale, args);
-});
+class application : public ruisapp::application
+{
+public:
+	const std::string res_path;
+
+	application(
+		bool window, //
+		std::string_view res_path
+	);
+
+	static application& inst()
+	{
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast, "here we
+		// are 100% sure the cast is safe")
+		return static_cast<application&>(ruisapp::application::inst());
+	}
+};
+
+std::unique_ptr<application> make_application(
+	std::string_view executable, //
+	utki::span<const char*> args
+);
 
 } // namespace booh
