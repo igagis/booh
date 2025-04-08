@@ -22,6 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #pragma once
 
 #include <cstdint>
+#include <vector>
 
 namespace booh {
 
@@ -38,6 +39,7 @@ public:
 
 class account_group : public account_tree_node
 {
+    std::vector<account_tree_node> children;
 public:
 	account_group(uint32_t id);
 };
