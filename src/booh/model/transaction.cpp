@@ -19,12 +19,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#pragma once
+#include "transaction.hpp"
 
-namespace booh {
-// TODO:
-
-namespace m {
-using namespace ruis::make;
-} // namespace m
-} // namespace booh
+using namespace booh;

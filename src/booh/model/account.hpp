@@ -21,10 +21,30 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
 
-namespace booh {
-// TODO:
+#include <cstdint>
 
-namespace m {
-using namespace ruis::make;
-} // namespace m
+namespace booh {
+
+class account_tree_node
+{
+protected:
+	account_tree_node() = default;
+
+public:
+	const uint32_t id;
+
+	account_tree_node(uint32_t id);
+};
+
+class account_group : public account_tree_node
+{
+public:
+	account_group(uint32_t id);
+};
+
+class account : public account_tree_node
+{
+public:
+	account(uint32_t id);
+};
 } // namespace booh

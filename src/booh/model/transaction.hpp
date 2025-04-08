@@ -22,9 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #pragma once
 
 namespace booh {
-// TODO:
-
-namespace m {
-using namespace ruis::make;
-} // namespace m
+class transaction
+{
+public:
+};
 } // namespace booh

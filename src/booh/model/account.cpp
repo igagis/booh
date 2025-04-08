@@ -19,12 +19,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#pragma once
+#include "account.hpp"
 
-namespace booh {
-// TODO:
+using namespace booh;
 
-namespace m {
-using namespace ruis::make;
-} // namespace m
-} // namespace booh
+account_tree_node::account_tree_node(uint32_t id) :
+	id(id)
+{}
+
+account_group::account_group(uint32_t id) :
+	account_tree_node(id)
+{}
+
+account::account(uint32_t id) :
+	account_tree_node(id)
+{}
