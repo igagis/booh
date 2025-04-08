@@ -1,7 +1,7 @@
 /*
-booh - Bedside monitor example GUI project
+booh - Double record bookkeeping application
 
-Copyright (C) 2024 Gagistech Oy <gagistechoy@gmail.com>
+Copyright (C) 2025 Ivan Gagis <igagis@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
