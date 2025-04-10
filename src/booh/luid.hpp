@@ -27,10 +27,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace booh {
 
+template <typename underlying_type>
+class luid_generator;
+
 // TODO: make concept to accept only unsigned integral types
 template <typename underlying_type = uint32_t>
 class luid
 {
+	friend class luid_generator<underlying_type>;
+
 	underlying_type id;
 
 	luid(underlying_type id) :
@@ -52,7 +57,7 @@ class luid_generator
 public:
 	luid<underlying_type> make()
 	{
-		return this->tip++;
+		return {this->tip++};
 	}
 
 	luid<underlying_type> make(underlying_type id)
