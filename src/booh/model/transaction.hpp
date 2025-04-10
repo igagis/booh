@@ -25,6 +25,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <string>
 #include <vector>
 
+#include <utki/shared_ref.hpp>
+
 namespace booh {
 
 class account;
@@ -33,16 +35,14 @@ class transaction_split
 {
 	std::string message;
 
-	std::reference_wrapper<const booh::account> account;
+	std::weak_ptr<booh::account> account;
 
 	uint64_t amount;
 
 	uint64_t quantity;
 
 public:
-	transaction_split(const booh::account& account) :
-		account(account)
-	{}
+	transaction_split() = default;
 };
 
 class transaction
@@ -55,4 +55,5 @@ class transaction
 
 public:
 };
+
 } // namespace booh

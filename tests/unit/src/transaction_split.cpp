@@ -9,7 +9,9 @@ const tst::set set("transaction_split", [](tst::suite& suite) {
 	suite.add("constructor", []() {
 		booh::account a;
 
-		booh::transaction_split ts(a);
+		booh::transaction_split ts;
+
+		// TODO: check something
 	});
 });
 } // namespace

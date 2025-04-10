@@ -21,9 +21,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include <vector>
+
+#include <utki/shared_ref.hpp>
+
+#include "account.hpp"
+
 namespace booh {
 class book
 {
+	std::vector<utki::shared_ref<account>> accounts;
+
+	std::vector<std::weak_ptr<transaction>> transactions;
+
+	std::vector<utki::shared_ref<account_tree_node>> accounts_tree;
+
 public:
 };
 } // namespace booh
