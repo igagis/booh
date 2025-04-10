@@ -22,3 +22,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "book.hpp"
 
 using namespace booh;
+
+book book::load(const papki::file& fi)
+{
+	return load(tml::read(fi));
+}
+
+book book::load(const tml::forest& desc)
+{
+	// TODO:
+	return book();
+}
+
+void book::save(papki::file& fi) const
+{
+	// TODO:
+}

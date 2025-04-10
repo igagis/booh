@@ -23,6 +23,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <vector>
 
+#include <tml/tree.hpp>
 #include <utki/shared_ref.hpp>
 
 #include "account.hpp"
@@ -37,5 +38,9 @@ class book
 	std::vector<utki::shared_ref<account_tree_node>> accounts_tree;
 
 public:
+	static book load(const tml::forest& desc);
+	static book load(const papki::file& fi);
+
+	void save(papki::file& fi) const;
 };
 } // namespace booh
