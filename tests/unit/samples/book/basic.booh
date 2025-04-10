@@ -1,0 +1,74 @@
+booh
+version{1}
+
+accounts{
+    a{
+        name{"bank"}
+        desc{"checking account"} // optional
+        type{assets}
+        qantity{true} // optional, false by default
+    }
+
+    a{
+        name{"some_expenses"}
+        desc{"some expenses account"} // optional
+        type{expenses}
+    }
+}
+
+accounts_tree{
+    g{
+        name{"assets"}
+        desc{"assets accounts"} // optional
+        type{assets}
+
+        children{
+            a{2} // index into accounts{}
+
+            g{
+                name{"subgroup"}
+                desc{"blah blah"} // optional
+                type{assets}
+            }
+        }
+    }
+
+    g{
+        name{"expenses"}
+        desc{"expenses accounts"} // optional
+        type{expenses}
+
+        children{
+            a{1} // index into accounts{}
+            a{3} // index into accounts{}
+
+            g{
+                ...
+            }
+        }
+    }
+}
+
+transactions{
+    t{
+        ref{123453252} // optional
+        desc{"some transaction description"} // optional
+        date{TODO}
+        splits{
+            s{
+                desc{"bla bla"} // optional
+                amount{100500} // in cents
+                quantity{13} // mandatory for quantity accounts
+                account{3} // index into accounts{}
+            }
+            s{
+                desc{"some desc"} // optional
+                amount{-100500} // in cents
+                quantity{13} // mandatory for quantity accounts
+                account{2} // index into accounts{}
+            }
+            // ...
+        }
+    }
+    // ...
+}

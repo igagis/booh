@@ -33,7 +33,7 @@ class account;
 
 class transaction_split
 {
-	std::string message;
+	std::u32string desc;
 
 	std::weak_ptr<booh::account> account;
 
@@ -51,7 +51,7 @@ class transaction
 
 	// TODO: date
 
-	std::string message;
+	std::u32string desc;
 
 public:
 };
