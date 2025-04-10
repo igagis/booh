@@ -33,7 +33,7 @@ class transaction_split
 {
 	std::string message;
 
-    // TODO: id
+	// TODO: id
 	std::weak_ptr<booh::account> account;
 
 	uint64_t amount;
