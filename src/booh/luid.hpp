@@ -34,11 +34,14 @@ class luid_generator;
 template <typename underlying_type = uint32_t>
 class luid
 {
+	static_assert(std::is_integral_v<underlying_type>, "underlying type must be integral");
+	static_assert(std::is_unsigned_v<underlying_type>, "underlying type must be unsigned");
+
 	friend class luid_generator<underlying_type>;
 
 	underlying_type id;
 
-	luid(underlying_type id) :
+	explicit luid(underlying_type id) :
 		id(id)
 	{}
 
@@ -49,22 +52,27 @@ public:
 	}
 };
 
+// TODO: make concept to accept only unsigned integral types
 template <typename underlying_type = uint32_t>
 class luid_generator
 {
+	static_assert(std::is_integral_v<underlying_type>, "underlying type must be integral");
+	static_assert(std::is_unsigned_v<underlying_type>, "underlying type must be unsigned");
+
 	underlying_type tip = 0;
 
 public:
 	luid<underlying_type> make()
 	{
-		return {this->tip++};
+		// TODO: pick from free ids if possible
+		return luid<underlying_type>(this->tip++);
 	}
 
 	luid<underlying_type> make(underlying_type id)
 	{
-		// TODO:
+		// TODO: check that id is free
 		utki::assert(false, SL);
-		return {id};
+		return luid<underlying_type>(id);
 	}
 };
 
