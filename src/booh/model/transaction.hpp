@@ -33,14 +33,16 @@ class transaction_split
 {
 	std::string message;
 
-	// TODO: id
-	std::weak_ptr<booh::account> account;
+	std::reference_wrapper<const booh::account> account;
 
 	uint64_t amount;
 
 	uint64_t quantity;
 
 public:
+	transaction_split(const booh::account& account) :
+		account(account)
+	{}
 };
 
 class transaction

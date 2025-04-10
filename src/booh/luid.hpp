@@ -27,9 +27,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace booh {
 
-template <typename underlying_type>
-class luid_generator;
-
 // TODO: make concept to accept only unsigned integral types
 template <typename underlying_type = uint32_t>
 class luid
@@ -37,7 +34,8 @@ class luid
 	static_assert(std::is_integral_v<underlying_type>, "underlying type must be integral");
 	static_assert(std::is_unsigned_v<underlying_type>, "underlying type must be unsigned");
 
-	friend class luid_generator<underlying_type>;
+	template <typename, bool>
+	friend class luid_generator;
 
 	underlying_type id;
 
@@ -53,26 +51,54 @@ public:
 };
 
 // TODO: make concept to accept only unsigned integral types
-template <typename underlying_type = uint32_t>
+template <typename underlying_type = uint32_t, bool reuse = false>
 class luid_generator
 {
 	static_assert(std::is_integral_v<underlying_type>, "underlying type must be integral");
 	static_assert(std::is_unsigned_v<underlying_type>, "underlying type must be unsigned");
 
-	underlying_type tip = 0;
+	struct variables_no_reuse {
+		underlying_type next_free_id = 0;
+	};
+
+	struct variables_reuse : public variables_no_reuse {
+		std::vector<underlying_type> free_ids;
+	};
+
+	std::conditional_t<
+		reuse, //
+		variables_reuse,
+		variables_no_reuse //
+		>
+		vars;
 
 public:
 	luid<underlying_type> make()
 	{
-		// TODO: pick from free ids if possible
-		return luid<underlying_type>(this->tip++);
+		if constexpr (reuse) {
+			// TODO: pick from free ids if possible
+		}
+		return luid<underlying_type>(this->vars.next_free_id++);
 	}
 
+	// TODO: enable only for reuse
 	luid<underlying_type> make(underlying_type id)
 	{
-		// TODO: check that id is free
-		utki::assert(false, SL);
+		if (id == this->vars.next_free_id) {
+			return this->make();
+		}
+
+		if constexpr (reuse) {
+			// TODO: pick from free ids if possible
+		}
+
 		return luid<underlying_type>(id);
+	}
+
+	// TODO: enable only for reuse
+	void free(luid<underlying_type> id)
+	{
+		// TODO:
 	}
 };
 

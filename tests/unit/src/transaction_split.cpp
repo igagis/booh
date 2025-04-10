@@ -1,0 +1,17 @@
+#include <booh/luid.hpp>
+#include <booh/model/account.hpp>
+#include <booh/model/transaction.hpp>
+#include <tst/check.hpp>
+#include <tst/set.hpp>
+
+namespace {
+const tst::set set("transaction_split", [](tst::suite& suite) {
+	suite.add("constructor", []() {
+		booh::luid_generator gen;
+
+		booh::account a(gen.make());
+
+		booh::transaction_split ts(a);
+	});
+});
+} // namespace
