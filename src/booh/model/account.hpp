@@ -24,6 +24,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <cstdint>
 #include <vector>
 
+#include <utki/debug.hpp>
+
 #include "transaction.hpp"
 
 namespace booh {
@@ -41,16 +43,26 @@ public:
 	{
 		return false;
 	}
+
+	[[noreturn]] virtual std::vector<utki::shared_ref<account_tree_node>>& children()
+	{
+		utki::assert(false, SL);
+	}
 };
 
 class account_tree_node_group : public account_tree_node
 {
-	std::vector<utki::shared_ref<account_tree_node>> children;
+	std::vector<utki::shared_ref<account_tree_node>> children_v;
 
 public:
 	virtual bool is_group() const noexcept override
 	{
 		return true;
+	}
+
+	virtual std::vector<utki::shared_ref<account_tree_node>>& children() override
+	{
+		return this->children_v;
 	}
 };
 
