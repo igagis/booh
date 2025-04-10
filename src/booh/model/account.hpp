@@ -34,9 +34,6 @@ protected:
 	account_tree_node() = default;
 
 public:
-	const luid<uint32_t> id;
-
-	account_tree_node(luid<uint32_t> id);
 };
 
 class account_group : public account_tree_node
@@ -44,12 +41,12 @@ class account_group : public account_tree_node
 	std::vector<account_tree_node> children;
 
 public:
-	account_group(luid<uint32_t> id);
+	account_group() = default;
 };
 
 class account : public account_tree_node
 {
 public:
-	account(luid<uint32_t> id);
+	account() = default;
 };
 } // namespace booh

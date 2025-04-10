@@ -22,15 +22,3 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "account.hpp"
 
 using namespace booh;
-
-account_tree_node::account_tree_node(luid<uint32_t> id) :
-	id(id)
-{}
-
-account_group::account_group(luid<uint32_t> id) :
-	account_tree_node(id)
-{}
-
-account::account(luid<uint32_t> id) :
-	account_tree_node(id)
-{}

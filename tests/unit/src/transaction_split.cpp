@@ -7,9 +7,7 @@
 namespace {
 const tst::set set("transaction_split", [](tst::suite& suite) {
 	suite.add("constructor", []() {
-		booh::luid_generator gen;
-
-		booh::account a(gen.make());
+		booh::account a;
 
 		booh::transaction_split ts(a);
 	});
