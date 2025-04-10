@@ -23,10 +23,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <ruisapp/application.hpp>
 
+#include "model/book.hpp"
+
 namespace booh {
 
 class application : public ruisapp::application
 {
+	booh::book book;
+
 public:
 	const std::string res_path;
 
