@@ -21,9 +21,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include <memory>
+#include <string>
+#include <vector>
+
 namespace booh {
+
+class account;
+
+class transaction_split
+{
+	std::string message;
+
+    // TODO: id
+	std::weak_ptr<booh::account> account;
+
+	uint64_t amount;
+
+	uint64_t quantity;
+
+public:
+};
+
 class transaction
 {
+	std::vector<transaction_split> splits;
+
+	// TODO: date
+
+	std::string message;
+
 public:
 };
 } // namespace booh
