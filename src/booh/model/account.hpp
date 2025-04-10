@@ -24,6 +24,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <cstdint>
 #include <vector>
 
+#include "../luid.hpp"
+
 namespace booh {
 
 class account_tree_node
@@ -32,9 +34,9 @@ protected:
 	account_tree_node() = default;
 
 public:
-	const uint32_t id;
+	const luid<uint32_t> id;
 
-	account_tree_node(uint32_t id);
+	account_tree_node(luid<uint32_t> id);
 };
 
 class account_group : public account_tree_node
@@ -42,12 +44,12 @@ class account_group : public account_tree_node
 	std::vector<account_tree_node> children;
 
 public:
-	account_group(uint32_t id);
+	account_group(luid<uint32_t> id);
 };
 
 class account : public account_tree_node
 {
 public:
-	account(uint32_t id);
+	account(luid<uint32_t> id);
 };
 } // namespace booh

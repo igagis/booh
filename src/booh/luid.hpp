@@ -19,18 +19,48 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#include "account.hpp"
+#pragma once
 
-using namespace booh;
+#include <cstdint>
 
-account_tree_node::account_tree_node(luid<uint32_t> id) :
-	id(id)
-{}
+#include <utki/debug.hpp>
 
-account_group::account_group(luid<uint32_t> id) :
-	account_tree_node(id)
-{}
+namespace booh {
 
-account::account(luid<uint32_t> id) :
-	account_tree_node(id)
-{}
+// TODO: make concept to accept only unsigned integral types
+template <typename underlying_type = uint32_t>
+class luid
+{
+	underlying_type id;
+
+	luid(underlying_type id) :
+		id(id)
+	{}
+
+public:
+	underlying_type get() const noexcept
+	{
+		return this->id;
+	}
+};
+
+template <typename underlying_type = uint32_t>
+class luid_generator
+{
+	underlying_type tip = 0;
+
+public:
+	luid<underlying_type> make()
+	{
+		return this->tip++;
+	}
+
+	luid<underlying_type> make(underlying_type id)
+	{
+		// TODO:
+		utki::assert(false, SL);
+		return {id};
+	}
+};
+
+} // namespace booh
