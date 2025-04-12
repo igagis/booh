@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "root_widget.hpp"
 
-#include <ruis/widget/container.hpp>
+#include <ruis/widget/group/tabbed_book.hpp>
 
 #include "style.hpp"
 
@@ -29,6 +29,7 @@ using namespace booh;
 
 utki::shared_ref<ruis::widget> booh::make_root_widget(const utki::shared_ref<ruis::context>& c)
 {
-	// TODO:
-	return m::container(c, {}, {});
+	// clang-format off
+	return m::tabbed_book(c, {});
+	// clang-format on
 }
