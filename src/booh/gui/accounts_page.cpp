@@ -21,11 +21,28 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "accounts_page.hpp"
 
+#include <ruis/widget/label/text.hpp>
+
+#include "style.hpp"
+
+using namespace std::string_literals;
 using namespace booh;
 
 accounts_page::accounts_page(utki::shared_ref<ruis::context> context) :
 	ruis::widget(std::move(context), {}, {}),
-	ruis::page(this->context, {})
+	ruis::page(this->context, {}),
+	// clang-format off
+	ruis::container(this->context,
+		{
+			.container_params{
+				.layout = ruis::layout::pile
+			}
+		},
+		{
+			m::text(this->context, {}, U"accounts page"s)
+		}
+	)
+	// clang-format on
 {}
 
 utki::shared_ref<booh::accounts_page> booh::make::accounts_page(utki::shared_ref<ruis::context> context)

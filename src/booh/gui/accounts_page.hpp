@@ -25,7 +25,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace booh {
 
-class accounts_page : public ruis::page
+class accounts_page :
+	public ruis::page, //
+	private ruis::container
 {
 public:
 	accounts_page(utki::shared_ref<ruis::context> context);
