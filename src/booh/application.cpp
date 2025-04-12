@@ -54,7 +54,7 @@ application::application(bool window, std::string_view res_path)
 
 std::unique_ptr<application> booh::make_application(
 	std::string_view executable, //
-	utki::span<const char*> args
+	utki::span<std::string_view> args
 )
 {
 	bool window = false;
