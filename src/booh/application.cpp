@@ -25,7 +25,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <papki/fs_file.hpp>
 #include <utki/debug.hpp>
 
-#include "root_widget.hpp"
+#include "gui/root_widget.hpp"
 
 using namespace std::string_literals;
 using namespace std::string_view_literals;

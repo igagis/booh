@@ -21,41 +21,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <memory>
-#include <string>
-#include <vector>
-
-#include <utki/shared_ref.hpp>
-
-#include "../money.hpp"
+#include <ruis/widget/group/book.hpp>
 
 namespace booh {
 
-class account;
-
-class transaction_split
+class accounts_page : public ruis::page
 {
-	std::u32string desc;
-
-	std::weak_ptr<booh::account> account;
-
-	money amount;
-
 public:
-	int64_t quantity;
-
-	transaction_split() = default;
+	accounts_page(utki::shared_ref<ruis::context> context);
 };
 
-class transaction
-{
-	std::vector<transaction_split> splits;
-
-	// TODO: date
-
-	std::u32string desc;
-
-public:
-};
+namespace make {
+utki::shared_ref<booh::accounts_page> accounts_page(utki::shared_ref<ruis::context> context);
+} // namespace make
 
 } // namespace booh

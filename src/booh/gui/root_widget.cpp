@@ -19,43 +19,34 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#pragma once
+#include "root_widget.hpp"
 
-#include <memory>
-#include <string>
-#include <vector>
+#include <ruis/widget/group/tabbed_book.hpp>
+#include <ruis/widget/label/text.hpp>
 
-#include <utki/shared_ref.hpp>
+#include "accounts_page.hpp"
+#include "style.hpp"
 
-#include "../money.hpp"
+using namespace std::string_literals;
 
-namespace booh {
+using namespace booh;
 
-class account;
-
-class transaction_split
+utki::shared_ref<ruis::widget> booh::make_root_widget(const utki::shared_ref<ruis::context>& c)
 {
-	std::u32string desc;
-
-	std::weak_ptr<booh::account> account;
-
-	money amount;
-
-public:
-	int64_t quantity;
-
-	transaction_split() = default;
-};
-
-class transaction
-{
-	std::vector<transaction_split> splits;
-
-	// TODO: date
-
-	std::u32string desc;
-
-public:
-};
-
-} // namespace booh
+	// clang-format off
+	return m::tabbed_book(c,
+		{},
+		{
+			{
+				m::tab(c,
+					{},
+					{
+						m::text(c, {}, U"Accounts"s)
+					}
+				),
+				booh::make::accounts_page(c)
+			}
+		}
+	);
+	// clang-format on
+}

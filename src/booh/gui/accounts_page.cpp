@@ -19,17 +19,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#include "root_widget.hpp"
-
-#include <ruis/widget/group/tabbed_book.hpp>
-
-#include "style.hpp"
+#include "accounts_page.hpp"
 
 using namespace booh;
 
-utki::shared_ref<ruis::widget> booh::make_root_widget(const utki::shared_ref<ruis::context>& c)
+accounts_page::accounts_page(utki::shared_ref<ruis::context> context) :
+	ruis::widget(std::move(context), {}, {}),
+	ruis::page(this->context, {})
+{}
+
+utki::shared_ref<booh::accounts_page> booh::make::accounts_page(utki::shared_ref<ruis::context> context)
 {
-	// clang-format off
-	return m::tabbed_book(c, {});
-	// clang-format on
+	return utki::make_shared<booh::accounts_page>(std::move(context));
 }
