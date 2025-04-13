@@ -48,6 +48,10 @@ application::application(bool window, std::string_view res_path)
 
 	this->gui.context.get().loader().mount_res_pack(*this->get_res_file(this->res_path));
 
+	this->gui.context.get().localization = utki::make_shared<ruis::localization>(
+		tml::read(*this->get_res_file(utki::cat(this->res_path, "localization/", "en.tml")))
+	);
+
 	auto c = make_root_widget(this->gui.context);
 	this->gui.set_root(c);
 }

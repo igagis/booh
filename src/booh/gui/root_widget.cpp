@@ -28,6 +28,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "style.hpp"
 
 using namespace std::string_literals;
+using namespace std::string_view_literals;
 
 using namespace booh;
 
@@ -41,7 +42,7 @@ utki::shared_ref<ruis::widget> booh::make_root_widget(const utki::shared_ref<rui
 				m::tab(c,
 					{},
 					{
-						m::text(c, {}, U"Accounts"s)
+						m::text(c, {}, c.get().loc().get("tab.accounts"sv))
 					}
 				),
 				booh::make::accounts_page(c)

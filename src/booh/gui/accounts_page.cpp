@@ -42,7 +42,7 @@ accounts_page::accounts_page(utki::shared_ref<ruis::context> context) :
 			m::text(this->context, {}, U"accounts page"s)
 		}
 	)
-	// clang-format on
+// clang-format on
 {}
 
 utki::shared_ref<booh::accounts_page> booh::make::accounts_page(utki::shared_ref<ruis::context> context)
