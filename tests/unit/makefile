@@ -12,7 +12,10 @@ this_cxxflags += -isystem ../../src/
 this__libbooh := ../../src/out/$(c)/libbooh.a
 this_ldlibs += $(this__libbooh)
 
-this_ldlibs += -l tst -l utki -l papki
+this_ldlibs += -l tst
+this_ldlibs += -l utki
+this_ldlibs += -l papki
+this_ldlibs += -l tml
 
 this_no_install := true
 

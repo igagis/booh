@@ -21,6 +21,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "book.hpp"
 
+using namespace std::string_view_literals;
+
 using namespace booh;
 
 book book::load(const papki::file& fi)
@@ -30,6 +32,36 @@ book book::load(const papki::file& fi)
 
 book book::load(const tml::forest& desc)
 {
+	if (desc.empty()) {
+		throw std::invalid_argument("book::load(forest): given book description is empty");
+	}
+
+	auto i = desc.begin();
+
+	// check booh tag
+	{
+		ASSERT(i != desc.end())
+		if (i->value != "booh") {
+			throw std::invalid_argument(
+				"booh::load(forest): given book description does not have 'booh' as its first element"
+			);
+		}
+	}
+
+	++i;
+
+	// check version
+	{
+		ASSERT(i != desc.end())
+		if (i->value != "version"sv) {
+			throw std::invalid_argument(
+				"book::load(forest): given book description does not have 'version' as first element"
+			);
+		}
+
+		// auto ver = get_property_value
+	}
+
 	// TODO:
 	return book();
 }
