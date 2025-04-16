@@ -54,7 +54,8 @@ private:
 	void add_account(const tml::forest& desc);
 
 	void add_accounts_tree(const tml::forest& desc);
-	utki::shared_ref<account_tree_node> read_account_tree_node(const tml::forest& desc);
+	utki::shared_ref<account_tree_node> read_account_tree_node(const tml::tree& desc);
+	utki::shared_ref<account_tree_node_group> read_account_tree_node_group(const tml::forest& desc);
 
 	void add_transactions(const tml::forest& desc);
 };

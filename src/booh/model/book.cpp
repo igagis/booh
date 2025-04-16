@@ -131,6 +131,21 @@ void book::add_accounts(const tml::forest& desc)
 	}
 }
 
+bool fill_account_tree_node_values(const tml::tree& prop, account_tree_node& atn)
+{
+	if (prop == "name"sv) {
+		atn.name = utki::to_utf32(get_tml_property_value(prop).string);
+	} else if (prop == "desc"sv) {
+		atn.description = utki::to_utf32(get_tml_property_value(prop).string);
+	} else if (prop == "reversed"sv) {
+		atn.is_reversed = get_tml_property_value(prop).to_bool();
+	} else {
+		return false;
+	}
+
+	return true;
+}
+
 void book::add_account(const tml::forest& desc)
 {
 	auto acc = utki::make_shared<account>();
@@ -138,13 +153,11 @@ void book::add_account(const tml::forest& desc)
 	auto& a = acc.get();
 
 	for (const auto& e : desc) {
-		if (e == "name"sv) {
-			a.name = utki::to_utf32(get_tml_property_value(e).string);
-		} else if (e == "desc"sv) {
-			a.description = utki::to_utf32(get_tml_property_value(e).string);
-		} else if (e == "reversed"sv) {
-			a.is_reversed = get_tml_property_value(e).to_bool();
-		} else if (e == "quantity"sv) {
+		if (fill_account_tree_node_values(e, a)) {
+			continue;
+		}
+
+		if (e == "quantity"sv) {
 			a.is_quantity = get_tml_property_value(e).to_bool();
 		}
 	}
@@ -152,10 +165,46 @@ void book::add_account(const tml::forest& desc)
 	this->accounts.push_back(std::move(acc));
 }
 
+utki::shared_ref<account_tree_node> book::read_account_tree_node(const tml::tree& desc)
+{
+	if (desc.value == "a"sv) {
+		auto index = get_tml_property_value(desc).to_uint32();
+		return this->accounts.at(index);
+	} else if (desc.value == "g"sv) {
+		return this->read_account_tree_node_group(desc.children);
+	}
+
+	throw std::invalid_argument(
+		utki::cat("book::read_account_tree_node(): unknown account tree node type: ", desc.value.string)
+	);
+}
+
+utki::shared_ref<account_tree_node_group> book::read_account_tree_node_group(const tml::forest& desc)
+{
+	auto ret = utki::make_shared<account_tree_node_group>();
+
+	for (const auto& n : desc) {
+		if (fill_account_tree_node_values(n, ret.get())) {
+			continue;
+		}
+
+		if (n == "children"sv) {
+			auto& children = ret.get().get_children();
+			for (const auto& c : n.children) {
+				children.push_back(this->read_account_tree_node(c));
+			}
+		}
+	}
+
+	return ret;
+}
+
 void book::add_accounts_tree(const tml::forest& desc)
 {
 	ASSERT(this->accounts_tree.is_group())
 	ASSERT(this->accounts_tree.get_children().empty())
 
-	// TODO:
+	for (const auto& node : desc) {
+		this->accounts_tree.get_children().push_back(read_account_tree_node(node));
+	}
 }
