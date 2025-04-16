@@ -5,20 +5,19 @@ accounts{
     a{
         name{"bank"}
         desc{"checking account"} // optional
-        type{assets}
+        reversed{false} // optional, false by default
         qantity{true} // optional, false by default
     }
 
     a{
         name{"some_expenses"}
         desc{"some expenses account"} // optional
-        type{expenses}
     }
 
     a{
         name{"some_liability"}
         desc{""} // optional
-        type{liabilities}
+        reversed{true} // optional
     }
 }
 
@@ -26,7 +25,7 @@ accounts_tree{
     g{
         name{"assets"}
         desc{"assets accounts"} // optional
-        type{assets}
+        reversed{false} // optional, false by default
 
         children{
             a{2} // index into accounts{}
@@ -34,7 +33,7 @@ accounts_tree{
             g{
                 name{"subgroup"}
                 desc{"blah blah"} // optional
-                type{assets}
+                // inherits reversed
             }
         }
     }
@@ -42,7 +41,6 @@ accounts_tree{
     g{
         name{"expenses"}
         desc{"expenses accounts"} // optional
-        type{expenses}
 
         children{
             a{1} // index into accounts{}
