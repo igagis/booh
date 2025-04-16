@@ -21,6 +21,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "book.hpp"
 
+#include <utki/unicode.hpp>
+
 #include "../util.hpp"
 
 using namespace std::string_view_literals;
@@ -81,13 +83,29 @@ book book::load(const tml::forest& desc)
 		if (i->value != "accounts"sv) {
 			throw std::invalid_argument(
 				utki::cat(
-					"unexpected tml node. expected: accoutns. found: ", //
+					"unexpected tml node. expected: accounts. found: ", //
 					i->value.string
 				)
 			);
 		}
 
-		ret.read_accounts(i->children);
+		ret.add_accounts(i->children);
+	}
+
+	++i;
+
+	// accounts_tree
+	{
+		if (i->value != "accounts_tree"sv) {
+			throw std::invalid_argument(
+				utki::cat(
+					"unexpected tml node. expected: accounts_tree. found: ", //
+					i->value.string
+				)
+			);
+		}
+
+		ret.add_accounts_tree(i->children);
 	}
 
 	// TODO:
@@ -100,9 +118,11 @@ void book::save(papki::file& fi) const
 	// TODO:
 }
 
-void book::read_accounts(const tml::forest& accounts_forest)
+void book::add_accounts(const tml::forest& desc)
 {
-	for (const auto& a : accounts_forest) {
+	ASSERT(this->accounts.empty())
+
+	for (const auto& a : desc) {
 		if (a.value != "a"sv) {
 			throw std::invalid_argument("unexpected account node");
 		}
@@ -113,9 +133,29 @@ void book::read_accounts(const tml::forest& accounts_forest)
 
 void book::add_account(const tml::forest& desc)
 {
-	auto a = utki::make_shared<account>();
+	auto acc = utki::make_shared<account>();
 
-	// TODO: fill in account info
+	auto& a = acc.get();
 
-	this->accounts.push_back(std::move(a));
+	for (const auto& e : desc) {
+		if (e == "name"sv) {
+			a.name = utki::to_utf32(get_tml_property_value(e).string);
+		} else if (e == "desc"sv) {
+			a.description = utki::to_utf32(get_tml_property_value(e).string);
+		} else if (e == "reversed"sv) {
+			a.is_reversed = get_tml_property_value(e).to_bool();
+		} else if (e == "quantity"sv) {
+			a.is_quantity = get_tml_property_value(e).to_bool();
+		}
+	}
+
+	this->accounts.push_back(std::move(acc));
+}
+
+void book::add_accounts_tree(const tml::forest& desc)
+{
+	ASSERT(this->accounts_tree.is_group())
+	ASSERT(this->accounts_tree.get_children().empty())
+
+	// TODO:
 }

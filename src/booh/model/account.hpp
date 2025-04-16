@@ -80,6 +80,8 @@ class account : public account_tree_node
 	std::vector<utki::shared_ref<transaction>> ledger_v;
 
 public:
+	bool is_quantity = false;
+
 	account() = default;
 
 	ledger& get_ledger() override

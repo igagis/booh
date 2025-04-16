@@ -50,7 +50,12 @@ public:
 	void save(papki::file& fi) const;
 
 private:
-	void read_accounts(const tml::forest& accounts_forest);
+	void add_accounts(const tml::forest& desc);
 	void add_account(const tml::forest& desc);
+
+	void add_accounts_tree(const tml::forest& desc);
+	utki::shared_ref<account_tree_node> read_account_tree_node(const tml::forest& desc);
+
+	void add_transactions(const tml::forest& desc);
 };
 } // namespace booh
