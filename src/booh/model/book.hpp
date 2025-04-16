@@ -33,9 +33,10 @@ class book
 {
 	std::vector<utki::shared_ref<account>> accounts;
 
+	// TODO: is needed?
 	std::vector<std::weak_ptr<transaction>> transactions;
 
-	std::vector<utki::shared_ref<account_tree_node>> accounts_tree;
+	account_tree_node_group accounts_tree;
 
 public:
 	size_t get_num_accounts() const noexcept
