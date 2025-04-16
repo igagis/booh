@@ -113,6 +113,9 @@ void book::read_accounts(const tml::forest& accounts_forest)
 
 void book::add_account(const tml::forest& desc)
 {
-	// TODO:
-	this->accounts.push_back(utki::make_shared<account>());
+	auto a = utki::make_shared<account>();
+
+	// TODO: fill in account info
+
+	this->accounts.push_back(std::move(a));
 }
