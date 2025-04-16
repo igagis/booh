@@ -1,5 +1,5 @@
 booh
-version{1}
+version{0}
 
 accounts{
     a{
@@ -13,6 +13,12 @@ accounts{
         name{"some_expenses"}
         desc{"some expenses account"} // optional
         type{expenses}
+    }
+
+    a{
+        name{"some_liability"}
+        desc{""} // optional
+        type{liabilities}
     }
 }
 

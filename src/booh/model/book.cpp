@@ -21,6 +21,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "book.hpp"
 
+#include "../util.hpp"
+
 using namespace std::string_view_literals;
 
 using namespace booh;
@@ -59,14 +61,58 @@ book book::load(const tml::forest& desc)
 			);
 		}
 
-		// auto ver = get_property_value
+		auto ver = get_tml_property_value(*i);
+		if (ver != "0"sv) {
+			throw std::invalid_argument(
+				utki::cat(
+					"book::load(forest): unsupported file format version: ", //
+					ver.string
+				)
+			);
+		}
+	}
+
+	++i;
+
+	book ret;
+
+	// accounts
+	{
+		if (i->value != "accounts"sv) {
+			throw std::invalid_argument(
+				utki::cat(
+					"unexpected tml node. expected: accoutns. found: ", //
+					i->value.string
+				)
+			);
+		}
+
+		ret.read_accounts(i->children);
 	}
 
 	// TODO:
-	return book();
+
+	return ret;
 }
 
 void book::save(papki::file& fi) const
 {
 	// TODO:
+}
+
+void book::read_accounts(const tml::forest& accounts_forest)
+{
+	for (const auto& a : accounts_forest) {
+		if (a.value != "a"sv) {
+			throw std::invalid_argument("unexpected account node");
+		}
+
+		this->add_account(a.children);
+	}
+}
+
+void book::add_account(const tml::forest& desc)
+{
+	// TODO:
+	this->accounts.push_back(utki::make_shared<account>());
 }

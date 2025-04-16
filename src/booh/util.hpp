@@ -21,8 +21,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include <tml/tree.hpp>
+
 namespace booh {
 
-// TODO:
+const tml::leaf& get_tml_property_value(const tml::tree prop);
 
 } // namespace booh

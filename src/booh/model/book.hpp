@@ -47,5 +47,9 @@ public:
 	static book load(const papki::file& fi);
 
 	void save(papki::file& fi) const;
+
+private:
+	void read_accounts(const tml::forest& accounts_forest);
+	void add_account(const tml::forest& desc);
 };
 } // namespace booh

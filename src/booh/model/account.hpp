@@ -44,9 +44,9 @@ public:
 		return false;
 	}
 
-	[[noreturn]] virtual std::vector<utki::shared_ref<account_tree_node>>& children()
+	virtual std::vector<utki::shared_ref<account_tree_node>>& children()
 	{
-		utki::assert(false, SL);
+		throw std::logic_error("children list requested from account_tree_node which cannot have children");
 	}
 };
 
