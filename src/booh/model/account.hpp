@@ -30,13 +30,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace booh {
 
+using ledger = std::vector<utki::shared_ref<transaction>>;
+
 class account_tree_node
 {
+public:
 	std::u32string name;
 
 	std::u32string description;
 
-public:
+	bool is_reversed = false;
+
 	virtual ~account_tree_node() = default;
 
 	virtual bool is_group() const noexcept
@@ -44,9 +48,14 @@ public:
 		return false;
 	}
 
-	virtual std::vector<utki::shared_ref<account_tree_node>>& children()
+	virtual std::vector<utki::shared_ref<account_tree_node>>& get_children()
 	{
 		throw std::logic_error("children list requested from account_tree_node which cannot have children");
+	}
+
+	virtual ledger& get_ledger()
+	{
+		throw std::logic_error("ledger is requested from account_tree_node which cannot have ledger");
 	}
 };
 
@@ -60,7 +69,7 @@ public:
 		return true;
 	}
 
-	virtual std::vector<utki::shared_ref<account_tree_node>>& children() override
+	virtual std::vector<utki::shared_ref<account_tree_node>>& get_children() override
 	{
 		return this->children_v;
 	}
@@ -68,10 +77,15 @@ public:
 
 class account : public account_tree_node
 {
-	std::vector<utki::shared_ref<transaction>> ledger;
+	std::vector<utki::shared_ref<transaction>> ledger_v;
 
 public:
 	account() = default;
+
+	ledger& get_ledger() override
+	{
+		return this->ledger_v;
+	}
 };
 
 } // namespace booh
