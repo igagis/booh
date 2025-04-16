@@ -9,3 +9,7 @@ img_questionmark{
 img_close{
     file{close.svg}
 }
+
+img_add{
+    file{plus.svg}
+}
