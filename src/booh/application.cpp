@@ -34,13 +34,14 @@ using namespace booh;
 
 application::application(bool window, std::string_view res_path)
     : ruisapp::application( //
-          "booh"s,
-          []() {
-            // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
-            ruisapp::window_params wp(r4::vector2<unsigned>(1024, 600));
-            return wp;
-          }()),
-      res_path(papki::as_dir(res_path))
+		"booh"s,
+		// clang-format off
+		{
+			.dims = {1024, 600}
+		}
+		// clang-format on
+	),
+    res_path(papki::as_dir(res_path))
 {
 	this->set_fullscreen(!window);
 
