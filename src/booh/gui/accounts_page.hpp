@@ -25,6 +25,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace booh {
 
+// NOLINTNEXTLINE(bugprone-incorrect-enable-shared-from-this, "shared_from_this is accessible via publicly inherited page")
 class accounts_page :
 	public ruis::page, //
 	private ruis::container

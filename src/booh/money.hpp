@@ -37,6 +37,11 @@ public:
 	money() = default;
 
 	static money make_cents(int64_t cents);
+
+	int64_t get_cents() const noexcept
+	{
+		return this->cents;
+	}
 };
 
 } // namespace booh

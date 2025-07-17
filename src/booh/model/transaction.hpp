@@ -33,29 +33,24 @@ namespace booh {
 
 class account;
 
-class transaction_split
-{
+struct transaction_split {
 	std::u32string desc;
 
 	std::weak_ptr<booh::account> account;
 
 	money amount;
 
-public:
-	int64_t quantity;
+	int64_t quantity = 0;
 
 	transaction_split() = default;
 };
 
-class transaction
-{
+struct transaction {
 	std::vector<transaction_split> splits;
 
 	// TODO: date
 
 	std::u32string desc;
-
-public:
 };
 
 } // namespace booh

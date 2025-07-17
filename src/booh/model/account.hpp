@@ -41,6 +41,14 @@ public:
 
 	bool is_reversed = false;
 
+	account_tree_node() = default;
+
+	account_tree_node(const account_tree_node&) = default;
+	account_tree_node& operator=(const account_tree_node&) = default;
+
+	account_tree_node(account_tree_node&&) = default;
+	account_tree_node& operator=(account_tree_node&&) = default;
+
 	virtual ~account_tree_node() = default;
 
 	virtual bool is_group() const noexcept
@@ -64,12 +72,12 @@ class account_tree_node_group : public account_tree_node
 	std::vector<utki::shared_ref<account_tree_node>> children_v;
 
 public:
-	virtual bool is_group() const noexcept override
+	bool is_group() const noexcept override
 	{
 		return true;
 	}
 
-	virtual std::vector<utki::shared_ref<account_tree_node>>& get_children() override
+	std::vector<utki::shared_ref<account_tree_node>>& get_children() override
 	{
 		return this->children_v;
 	}

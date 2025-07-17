@@ -19,22 +19,26 @@ Standards-Version: 3.9.2
 Package: booh-opengles-xorg
 Section: misc
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends:
+	${shlibs:Depends},
+	${misc:Depends},
 	booh-data
 Description: Double record bookkeeping app.
- Double record bookkeeping application.
+	Double record bookkeeping application.
 
 Package: booh-opengles-wayland
 Section: misc
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends:
+	${shlibs:Depends},
+	${misc:Depends},
 	booh-data
 Description: Double record bookkeeping app.
- Double record bookkeeping application.
+	Double record bookkeeping application.
 
 Package: booh-data
 Section: misc
 Architecture: all
 Depends: ${misc:Depends}
 Description: Double record bookkeeping app data files.
- Data files for booh.
+	Data files for booh.

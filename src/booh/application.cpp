@@ -32,12 +32,17 @@ using namespace std::string_view_literals;
 
 using namespace booh;
 
+namespace {
+constexpr auto window_width = 1024;
+constexpr auto window_height = 600;
+} // namespace
+
 application::application(bool window, std::string_view res_path)
     : ruisapp::application( //
 		"booh"s,
 		// clang-format off
 		{
-			.dims = {1024, 600}
+			.dims = {window_width, window_height}
 		}
 		// clang-format on
 	),
