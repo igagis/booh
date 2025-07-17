@@ -201,10 +201,10 @@ utki::shared_ref<account_tree_node_group> book::read_account_tree_node_group(con
 
 void book::add_accounts_tree(const tml::forest& desc)
 {
-	ASSERT(this->accounts_tree.is_group())
-	ASSERT(this->accounts_tree.get_children().empty())
+	ASSERT(this->root_accounts.is_group())
+	ASSERT(this->root_accounts.get_children().empty())
 
 	for (const auto& node : desc) {
-		this->accounts_tree.get_children().push_back(read_account_tree_node(node));
+		this->root_accounts.get_children().push_back(read_account_tree_node(node));
 	}
 }
