@@ -22,4 +22,5 @@ myci_declare_application(${name}
         ../../res
     DEPENDENCIES
         ruisapp::ruisapp-opengl
+        clargs
 )
