@@ -22,3 +22,53 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "table_tree_view.hpp"
 
 using namespace booh;
+
+namespace {
+utki::shared_ref<ruis::container> make_headers_widget(const utki::shared_ref<ruis::context>& c)
+{
+	// clang-format off
+    return ruis::make::row(c,
+        {
+            .layout_params{
+                .dims = {ruis::dim::fill, ruis::dim::fill},
+                .weight = 1
+            }
+        },
+        {
+            // TODO:
+        }
+    );
+	// clang-format on
+}
+} // namespace
+
+table_tree_view::table_tree_view(
+	utki::shared_ref<ruis::context> context, //
+	all_parameters params
+) :
+	ruis::widget(
+		std::move(context), //
+		std::move(params.layout_params),
+		std::move(params.widget_params)
+	),
+	// clang-format off
+    ruis::container(
+        this->context,
+        {
+            .container_params{
+                .layout = ruis::layout::column
+            }
+        },
+        {
+            make_headers_widget(this->context),
+            ruis::make::tree_view(this->context,
+                {
+                    .layout_params{
+                        .dims = {ruis::dim::fill, ruis::dim::min}
+                    }
+                }
+            )
+        }
+    )
+// clang-format on
+{}
