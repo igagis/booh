@@ -24,19 +24,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 using namespace booh;
 
 namespace {
-utki::shared_ref<ruis::container> make_headers_widget(const utki::shared_ref<ruis::context>& c)
+utki::shared_ref<ruis::container> make_headers_widget(
+	const utki::shared_ref<ruis::context>& c, //
+	ruis::widget_list column_headers
+)
 {
 	// clang-format off
     return ruis::make::row(c,
         {
             .layout_params{
-                .dims = {ruis::dim::fill, ruis::dim::fill},
-                .weight = 1
+                .dims = {ruis::dim::fill, ruis::dim::max}
             }
         },
-        {
-            // TODO:
-        }
+        std::move(column_headers)
     );
 	// clang-format on
 }
@@ -60,11 +60,14 @@ table_tree_view::table_tree_view(
             }
         },
         {
-            make_headers_widget(this->context),
+            make_headers_widget(this->context,
+                std::move(params.table_tree_view_params.column_headers)
+            ),
             ruis::make::tree_view(this->context,
                 {
                     .layout_params{
-                        .dims = {ruis::dim::fill, ruis::dim::min}
+                        .dims = {ruis::dim::fill, ruis::dim::fill},
+                        .weight = 1
                     }
                 }
             )
@@ -72,3 +75,14 @@ table_tree_view::table_tree_view(
     )
 // clang-format on
 {}
+
+utki::shared_ref<booh::table_tree_view> make::table_tree_view(
+	utki::shared_ref<ruis::context> context, //
+	booh::table_tree_view::all_parameters params
+)
+{
+	return utki::make_shared<booh::table_tree_view>(
+		std::move(context), //
+		std::move(params)
+	);
+}

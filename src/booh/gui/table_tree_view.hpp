@@ -31,9 +31,18 @@ class table_tree_view :
 	private ruis::container
 {
 public:
+	struct parameters {
+		/**
+		 * @brief Column header widgets.
+		 * These widgets will be put inside of a ruis::container with row layout.
+		 */
+		ruis::widget_list column_headers = {};
+	};
+
 	struct all_parameters {
 		ruis::layout_parameters layout_params;
 		ruis::widget::parameters widget_params;
+		parameters table_tree_view_params;
 	};
 
 	table_tree_view(
@@ -58,5 +67,12 @@ public:
 		virtual ruis::container get_widget(utki::span<const size_t> index) = 0;
 	};
 };
+
+namespace make {
+utki::shared_ref<booh::table_tree_view> table_tree_view(
+	utki::shared_ref<ruis::context> context, //
+	booh::table_tree_view::all_parameters params
+);
+} // namespace make
 
 } // namespace booh
