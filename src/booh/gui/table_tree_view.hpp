@@ -46,10 +46,16 @@ public:
 	public:
 		provider(utki::shared_ref<ruis::context> context);
 
-		virtual ruis::widget_list get_widgets(
-			utki::span<const size_t> index, //
-			bool is_collapsed
-		) = 0;
+		/**
+		 * @brief Create a tree_view item widget.
+		 * The table_tree_view will call this mthod when it needs a widget for the given
+		 * tree view item.
+		 * The widget has to be a container and is supposed to have a row layout.
+		 * Each child widget of the container widget will represent a cell in the table row.
+		 * @param index - index of the item into the tree data to create widget for.
+		 * @return A container widget with row layout containing table row cell widgets.
+		 */
+		virtual ruis::container get_widget(utki::span<const size_t> index) = 0;
 	};
 };
 
