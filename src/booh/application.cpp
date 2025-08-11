@@ -37,16 +37,15 @@ constexpr auto window_width = 1024;
 constexpr auto window_height = 600;
 } // namespace
 
-application::application(bool window, std::string_view res_path)
-    : ruisapp::application( //
+application::application(bool window, std::string_view res_path) :
+	ruisapp::application( //
 		"booh"s,
 		// clang-format off
 		{
 			.dims = {window_width, window_height}
-		}
-		// clang-format on
+		} // clang-format on
 	),
-    res_path(papki::as_dir(res_path))
+	res_path(papki::as_dir(res_path))
 {
 	this->set_fullscreen(!window);
 

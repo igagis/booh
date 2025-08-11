@@ -24,7 +24,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <ruis/widget/label/text.hpp>
 
 #include "style.hpp"
-#include "table_tree_view.hpp"
 
 using namespace std::string_literals;
 using namespace booh;
@@ -40,20 +39,20 @@ accounts_page::accounts_page(utki::shared_ref<ruis::context> context) :
 			}
 		},
 		{
-			make::table_tree_view(this->context,
-				{
-					.layout_params{
-						.dims = {ruis::dim::fill, ruis::dim::fill}
-					},
-					.table_tree_view_params{
-						.column_headers = {
-							m::text(this->context, {}, U"account"s),
-							m::text(this->context, {}, U"description"s),
-							m::text(this->context, {}, U"total"s)
-						}
-					}
-				}
-			),
+			// make::table_tree_view(this->context,
+			// 	{
+			// 		.layout_params{
+			// 			.dims = {ruis::dim::fill, ruis::dim::fill}
+			// 		},
+			// 		.table_tree_view_params{
+			// 			.column_headers = {
+			// 				m::text(this->context, {}, U"account"s),
+			// 				m::text(this->context, {}, U"description"s),
+			// 				m::text(this->context, {}, U"total"s)
+			// 			}
+			// 		}
+			// 	}
+			// ),
 			m::text(this->context, {}, U"accounts page"s)
 		}
 	)

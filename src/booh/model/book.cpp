@@ -65,12 +65,10 @@ book book::load(const tml::forest& desc)
 
 		auto ver = get_tml_property_value(*i);
 		if (ver != "0"sv) {
-			throw std::invalid_argument(
-				utki::cat(
-					"book::load(forest): unsupported file format version: ", //
-					ver.string
-				)
-			);
+			throw std::invalid_argument(utki::cat(
+				"book::load(forest): unsupported file format version: ", //
+				ver.string
+			));
 		}
 	}
 
@@ -81,12 +79,10 @@ book book::load(const tml::forest& desc)
 	// accounts
 	{
 		if (i->value != "accounts"sv) {
-			throw std::invalid_argument(
-				utki::cat(
-					"unexpected tml node. expected: accounts. found: ", //
-					i->value.string
-				)
-			);
+			throw std::invalid_argument(utki::cat(
+				"unexpected tml node. expected: accounts. found: ", //
+				i->value.string
+			));
 		}
 
 		ret.add_accounts(i->children);
@@ -97,12 +93,10 @@ book book::load(const tml::forest& desc)
 	// accounts_tree
 	{
 		if (i->value != "accounts_tree"sv) {
-			throw std::invalid_argument(
-				utki::cat(
-					"unexpected tml node. expected: accounts_tree. found: ", //
-					i->value.string
-				)
-			);
+			throw std::invalid_argument(utki::cat(
+				"unexpected tml node. expected: accounts_tree. found: ", //
+				i->value.string
+			));
 		}
 
 		ret.add_accounts_tree(i->children);

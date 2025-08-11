@@ -26,13 +26,11 @@ using namespace booh;
 const tml::leaf& booh::get_tml_property_value(const tml::tree prop)
 {
 	if (prop.children.empty()) {
-		throw std::invalid_argument(
-			utki::cat(
-				"tml property '", //
-				prop.value.string,
-				"' has no value"
-			)
-		);
+		throw std::invalid_argument(utki::cat(
+			"tml property '", //
+			prop.value.string,
+			"' has no value"
+		));
 	}
 
 	return prop.children.front().value;
