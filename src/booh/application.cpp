@@ -38,27 +38,33 @@ constexpr auto window_height = 600;
 } // namespace
 
 application::application(bool window, std::string_view res_path) :
-	ruisapp::application( //
-		"booh"s,
-		// clang-format off
-		{
-			.dims = {window_width, window_height}
-		} // clang-format on
-	),
+	ruisapp::application({
+		.name = "booh"s //
+	}),
 	res_path(papki::as_dir(res_path))
 {
-	this->set_fullscreen(!window);
+	auto& win = this->make_window(
+		// clang-format off
+		{
+			.dims = {window_width, window_height},
+			.fullscreen = !window
+		} // clang-format on
+	);
 
-	this->gui.init_standard_widgets(*this->get_res_file());
+	win.gui.context.get().window().close_handler = [this]() {
+		this->quit();
+	};
 
-	this->gui.context.get().loader().mount_res_pack(*this->get_res_file(this->res_path));
+	win.gui.init_standard_widgets(*this->get_res_file());
 
-	this->gui.context.get().localization = utki::make_shared<ruis::localization>(
+	win.gui.context.get().loader().mount_res_pack(*this->get_res_file(this->res_path));
+
+	win.gui.context.get().localization = utki::make_shared<ruis::localization>(
 		tml::read(*this->get_res_file(utki::cat(this->res_path, "localization/", "en.tml")))
 	);
 
-	auto c = make_root_widget(this->gui.context);
-	this->gui.set_root(c);
+	auto c = make_root_widget(win.gui.context);
+	win.gui.set_root(c);
 }
 
 std::unique_ptr<application> booh::make_application(
