@@ -62,7 +62,7 @@ define booh_rules
 
     this_ldlibs += $$(this_out_dir)libbooh.a
 
-    this_ldlibs += -l papki
+    this_ldlibs += -l fsif
     this_ldlibs += -l clargs
     this_ldlibs += -l nitki
     this_ldlibs += -l opros

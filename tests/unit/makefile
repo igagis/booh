@@ -14,7 +14,7 @@ this_ldlibs += $(this__libbooh)
 
 this_ldlibs += -l tst
 this_ldlibs += -l utki
-this_ldlibs += -l papki
+this_ldlibs += -l fsif
 this_ldlibs += -l tml
 
 this_no_install := true

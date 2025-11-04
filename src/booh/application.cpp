@@ -22,7 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "application.hpp"
 
 #include <clargs/parser.hpp>
-#include <papki/fs_file.hpp>
+#include <fsif/native_file.hpp>
 #include <utki/debug.hpp>
 
 #include "gui/root_widget.hpp"
@@ -41,7 +41,7 @@ application::application(bool window, std::string_view res_path) :
 	ruisapp::application({
 		.name = "booh"s //
 	}),
-	res_path(papki::as_dir(res_path))
+	res_path(fsif::as_dir(res_path))
 {
 	auto& win = this->make_window(
 		// clang-format off
@@ -76,7 +76,7 @@ std::unique_ptr<application> booh::make_application(
 	bool help = false;
 
 	std::string res_path = []() {
-		papki::fs_file local_share("/usr/local/share/booh/"sv);
+		fsif::native_file local_share("/usr/local/share/booh/"sv);
 
 		if (local_share.exists()) {
 			return local_share.path();

@@ -29,7 +29,7 @@ using namespace std::string_view_literals;
 
 using namespace booh;
 
-book book::load(const papki::file& fi)
+book book::load(const fsif::file& fi)
 {
 	return load(tml::read(fi));
 }
@@ -107,7 +107,7 @@ book book::load(const tml::forest& desc)
 	return ret;
 }
 
-void book::save(papki::file& fi) const
+void book::save(fsif::file& fi) const
 {
 	// TODO:
 }

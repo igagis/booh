@@ -45,9 +45,9 @@ public:
 	}
 
 	static book load(const tml::forest& desc);
-	static book load(const papki::file& fi);
+	static book load(const fsif::file& fi);
 
-	void save(papki::file& fi) const;
+	void save(fsif::file& fi) const;
 
 private:
 	void add_accounts(const tml::forest& desc);
