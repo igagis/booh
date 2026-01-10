@@ -55,12 +55,12 @@ application::application(bool window, std::string_view res_path) :
 		this->quit();
 	};
 
-	win.gui.init_standard_widgets(*this->get_res_file());
+	win.gui.init_standard_widgets(this->get_res_file());
 
-	win.gui.context.get().loader().mount_res_pack(*this->get_res_file(this->res_path));
+	win.gui.context.get().loader().mount_res_pack(this->get_res_file(this->res_path));
 
 	win.gui.context.get().localization = utki::make_shared<ruis::localization>(
-		tml::read(*this->get_res_file(utki::cat(this->res_path, "localization/", "en.tml")))
+		tml::read(this->get_res_file(utki::cat(this->res_path, "localization/", "en.tml")))
 	);
 
 	auto c = make_root_widget(win.gui.context);
