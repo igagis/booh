@@ -41,7 +41,7 @@ accounts_page::accounts_page(utki::shared_ref<ruis::context> context) :
 		{
 			// make::table_tree_view(this->context,
 			// 	{
-			// 		.layout{
+			// 		.layout_params{
 			// 			.dims = {ruis::dim::fill, ruis::dim::fill}
 			// 		},
 			// 		.table_tree_view_params{
