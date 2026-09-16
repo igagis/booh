@@ -21,6 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "root_widget.hpp"
 
+#include <ruis/widget/button/tab.hpp>
 #include <ruis/widget/group/tabbed_book.hpp>
 #include <ruis/widget/label/text.hpp>
 

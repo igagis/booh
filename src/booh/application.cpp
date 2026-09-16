@@ -23,6 +23,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <clargs/parser.hpp>
 #include <fsif/native_file.hpp>
+#include <ruis/standard_widgets.hpp>
 #include <utki/debug.hpp>
 
 #include "gui/root_widget.hpp"
@@ -55,7 +56,10 @@ application::application(bool window, std::string_view res_path) :
 		this->quit();
 	};
 
-	win.gui.init_standard_widgets(this->get_res_file());
+	ruis::init_standard_widgets(
+		win.gui.context, //
+		this->get_res_file()
+	);
 
 	win.gui.context.get().loader().mount_res_pack(this->get_res_file(this->res_path));
 

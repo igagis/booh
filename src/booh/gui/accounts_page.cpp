@@ -34,7 +34,7 @@ accounts_page::accounts_page(utki::shared_ref<ruis::context> context) :
 	// clang-format off
 	ruis::container(this->context,
 		{
-			.container_params{
+			.params{
 				.layout = ruis::layout::pile
 			}
 		},
