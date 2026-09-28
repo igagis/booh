@@ -56,11 +56,6 @@ application::application(bool window, std::string_view res_path) :
 		this->quit();
 	};
 
-	ruis::mount_ruis_res_pack(
-		win.gui.context, //
-		this->get_res_file()
-	);
-
 	win.gui.context.get().loader().mount_res_pack(this->get_res_file(this->res_path));
 
 	win.gui.context.get().localization = utki::make_shared<ruis::localization>(
