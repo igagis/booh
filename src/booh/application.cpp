@@ -23,7 +23,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <clargs/parser.hpp>
 #include <fsif/native_file.hpp>
-#include <ruis/standard_resources.hpp>
 #include <utki/debug.hpp>
 
 #include "gui/root_widget.hpp"
